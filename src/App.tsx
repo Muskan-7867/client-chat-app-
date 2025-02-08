@@ -5,7 +5,10 @@ import { io } from "socket.io-client";
 type Message = string;
 
 // Connect to WebSocket server
-const socket = io(import.meta.env.VITE_BACKEND_URL);
+const socket = io("https://server-chat-app-1.onrender.com", {
+  transports: ["websocket", "polling"], // Ensures compatibility
+  withCredentials: true, // Ensures cookies and auth headers are sent
+})
 
 const App: React.FC = () => {
   const [message, setMessage] = useState<string>("");
